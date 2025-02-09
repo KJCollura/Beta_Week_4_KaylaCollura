@@ -15,7 +15,10 @@ public class Cube_Movement : MonoBehaviour
             cubeRb = GetComponent<Rigidbody>();
         
         if (cubeRb != null)
+        {
             cubeRb.isKinematic = false; // Ensure Rigidbody is not kinematic
+            cubeRb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation; // Keep cube on the plane
+        }
     }
 
     void Update()
@@ -40,8 +43,10 @@ public class Cube_Movement : MonoBehaviour
         
         if (cubeRb != null && Vector3.Distance(player.position, cubeRb.position) <= interactionDistance)
         {
-            Vector3 pushDirection = (cubeRb.position - player.position).normalized; // Get direction away from player
-            cubeRb.AddForce(pushDirection * pushForce, ForceMode.Impulse); // Apply force to push cube away
+            Vector3 pushDirection = (cubeRb.position - player.position).normalized;
+            pushDirection.y = 0; // Ensure movement stays on the plane
+            cubeRb.linearVelocity = Vector3.zero; // Stop the cube before applying new force
+            cubeRb.AddForce(pushDirection * pushForce, ForceMode.Impulse);
         }
     }
 }

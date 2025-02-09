@@ -133,11 +133,10 @@ GameObject:
   - component: {fileID: 135923932}
   - component: {fileID: 135923931}
   - component: {fileID: 135923930}
-  - component: {fileID: 135923937}
   - component: {fileID: 135923938}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,8 +157,8 @@ MonoBehaviour:
   SprintMultiplier: 2
   JumpForce: 5
   GroundCheckDistance: 1.5
-  LookSensitivityX: 1
-  LookSensitivityY: 1
+  LookSensitivityX: 2
+  LookSensitivityY: 2
   MinYLookAngle: -90
   MaxYLookAngle: 90
   PlayerCamera: {fileID: 0}
@@ -282,22 +281,6 @@ Transform:
   - {fileID: 1736065766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &135923937
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 135923929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fb439b67e9db0544adfecf5bc2db99a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 7
-  shrinkSpeed: 2
-  moveDownSpeed: 1
-  minScale: 0.1
 --- !u!54 &135923938
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -459,7 +442,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &330585545
 Camera:
   m_ObjectHideFlags: 0
@@ -756,7 +739,7 @@ GameObject:
   - component: {fileID: 1044539304}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Enemy
+  m_TagString: Cube
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -866,8 +849,8 @@ MonoBehaviour:
   player: {fileID: 135923935}
   playerController: {fileID: 135923931}
   cubeRb: {fileID: 1044539305}
-  interactionDistance: 1
-  pushForce: 10
+  interactionDistance: 3
+  pushForce: 2
 --- !u!54 &1044539305
 Rigidbody:
   m_ObjectHideFlags: 0
