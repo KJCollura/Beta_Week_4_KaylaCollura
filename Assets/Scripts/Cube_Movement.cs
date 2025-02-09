@@ -13,7 +13,7 @@ public class Cube_Movement : MonoBehaviour
     {
         if (cubeRb == null)
             cubeRb = GetComponent<Rigidbody>();
-        
+
         if (cubeRb != null)
         {
             cubeRb.isKinematic = false; // Ensure Rigidbody is not kinematic
@@ -23,8 +23,11 @@ public class Cube_Movement : MonoBehaviour
 
     void Update()
     {
+        if (player == null || playerController == null) return; // Ensure player references are set
+
+        // Player movement
         float move = 0f;
-        
+
         if (Input.GetKey(KeyCode.W))
         {
             move = speed * Time.deltaTime;
@@ -33,20 +36,20 @@ public class Cube_Movement : MonoBehaviour
         {
             move = -speed * Time.deltaTime;
         }
-        
+
         Vector3 movement = player.transform.forward * move;
-        
-        if (playerController != null)
-        {
-            playerController.Move(movement); // Move player
-        }
-        
+        playerController.Move(movement); // Move player
+
+        // Cube interaction
         if (cubeRb != null && Vector3.Distance(player.position, cubeRb.position) <= interactionDistance)
         {
-            Vector3 pushDirection = (cubeRb.position - player.position).normalized;
-            pushDirection.y = 0; // Ensure movement stays on the plane
-            cubeRb.linearVelocity = Vector3.zero; // Stop the cube before applying new force
-            cubeRb.AddForce(pushDirection * pushForce, ForceMode.Impulse);
+            if (Input.GetKeyDown(KeyCode.E)) // Push only when E is pressed
+            {
+                Vector3 pushDirection = (cubeRb.position - player.position).normalized;
+                pushDirection.y = 0; // Ensure movement stays on the plane
+                cubeRb.linearVelocity = Vector3.zero; // Stop previous movement before applying new force
+                cubeRb.AddForce(pushDirection * pushForce, ForceMode.Impulse);
+            }
         }
     }
 }

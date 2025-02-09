@@ -161,7 +161,7 @@ MonoBehaviour:
   LookSensitivityY: 2
   MinYLookAngle: -90
   MaxYLookAngle: 90
-  PlayerCamera: {fileID: 0}
+  PlayerCamera: {fileID: 1736065766}
   Gravity: -9.81
 --- !u!143 &135923931
 CharacterController:
@@ -307,7 +307,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &298294825
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,7 +739,7 @@ GameObject:
   - component: {fileID: 1044539304}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Cube
+  m_TagString: cubeRb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -850,7 +850,7 @@ MonoBehaviour:
   playerController: {fileID: 135923931}
   cubeRb: {fileID: 1044539305}
   interactionDistance: 3
-  pushForce: 2
+  pushForce: 10
 --- !u!54 &1044539305
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -873,11 +873,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &1145155815
 GameObject:
   m_ObjectHideFlags: 0
