@@ -6,11 +6,10 @@ public class PlayerInteraction : MonoBehaviour
     public float moveSpeed = 5f;
     public TMP_Text scoreText; // Use TMP_Text instead of Text
 
-    private int score = 0;
-
     void Update()
     {
         MovePlayer();
+        UpdateScoreUI();
     }
 
     void MovePlayer()
@@ -25,23 +24,24 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (other.CompareTag("Cube")) // Cube deducts points
         {
-            score -= 10; 
+            KC_ScoreManager.instance?.AddScore(-10);
+            Debug.Log("Cube collected: -10 points.");
             Destroy(other.gameObject);
         }
         else if (other.CompareTag("Sphere")) // Sphere adds points
         {
-            score += 5; 
+            KC_ScoreManager.instance?.AddScore(5);
+            Debug.Log("Sphere collected: +5 points.");
             Destroy(other.gameObject);
         }
-
-        UpdateScoreUI();
     }
 
     void UpdateScoreUI()
     {
-        if (scoreText != null)
+        if (scoreText != null && KC_ScoreManager.instance != null)
         {
-            scoreText.text = "Score: " + score;
+            int currentScore = KC_ScoreManager.instance.GetScore();
+            scoreText.text = $"Score: {currentScore}";
         }
     }
 }

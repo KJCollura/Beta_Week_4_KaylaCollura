@@ -10,6 +10,7 @@ TagManager:
   - Waypoint
   - Sphere
   - scoreText
+  - ScoreManager
   layers:
   - Default
   - TransparentFX
