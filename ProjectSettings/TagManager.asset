@@ -8,6 +8,8 @@ TagManager:
   - Cube
   - cubeRb
   - Waypoint
+  - Sphere
+  - scoreText
   layers:
   - Default
   - TransparentFX
