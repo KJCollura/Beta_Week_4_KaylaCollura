@@ -1,6 +1,7 @@
+using System.Collections;
 using UnityEngine;
 
-namespace DoorScript
+namespace KC_DoorScript
 {
     [RequireComponent(typeof(AudioSource))]
     public class KC_DoorScript : MonoBehaviour
@@ -15,51 +16,53 @@ namespace DoorScript
 
         private bool playerNearby = false;
 
-        // Collider that blocks the player
+        // Minimum score required to open door
+        public int requiredScore = 50;
+
+        // Collider to block the doorway
         public Collider doorCollider;
 
         void Start()
         {
-            // Force test score to 100
-            KC_ScoreManager.instance?.AddScore(100);
-            Debug.Log($"Start: Score forced to {KC_ScoreManager.instance?.GetScore()}");
-
             if (doorCollider != null) doorCollider.enabled = true;
             else Debug.LogWarning("Door Collider not assigned!");
+
+            asource = GetComponent<AudioSource>();
         }
 
         void Update()
         {
             RotateDoor();
 
-            // Detect E key and attempt to open door if conditions are met
+            // Check if player presses E
             if (playerNearby && Input.GetKeyDown(KeyCode.E))
             {
-                Debug.Log("E key pressed - checking score...");
-
                 int currentScore = KC_ScoreManager.instance?.GetScore() ?? -1;
-                Debug.Log($"Current Score: {currentScore}");
 
-                if (currentScore >= 50)
+                Debug.Log($"E pressed. Player Score: {currentScore}. Required: {requiredScore}");
+
+                // Check if player has enough points
+                if (currentScore >= requiredScore)
                 {
+                    Debug.Log("Score requirement met. Opening door.");
                     OpenDoor();
                 }
                 else
                 {
-                    Debug.Log("Insufficient score to open door.");
+                    Debug.LogWarning($"Insufficient points! Need {requiredScore} but have {currentScore}.");
                 }
             }
         }
 
         void RotateDoor()
         {
-            Quaternion targetRotation = open 
-                ? Quaternion.Euler(0, doorOpenAngle, 0) 
+            Quaternion targetRotation = open
+                ? Quaternion.Euler(0, doorOpenAngle, 0)
                 : Quaternion.Euler(0, doorCloseAngle, 0);
 
             transform.localRotation = Quaternion.Slerp(
-                transform.localRotation, 
-                targetRotation, 
+                transform.localRotation,
+                targetRotation,
                 Time.deltaTime * 5 * smooth
             );
         }
@@ -91,8 +94,8 @@ namespace DoorScript
         {
             if (other.CompareTag("Player"))
             {
+                Debug.Log("Player detected near the door.");
                 playerNearby = true;
-                Debug.Log("Player entered door trigger.");
             }
         }
 
@@ -100,8 +103,8 @@ namespace DoorScript
         {
             if (other.CompareTag("Player"))
             {
+                Debug.Log("Player left the door area.");
                 playerNearby = false;
-                Debug.Log("Player left door trigger.");
             }
         }
     }
