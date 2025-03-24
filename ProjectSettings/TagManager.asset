@@ -11,6 +11,7 @@ TagManager:
   - Sphere
   - scoreText
   - ScoreManager
+  - Clue
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Clue
   - 
   - 
   - 
